@@ -1,0 +1,2 @@
+>Libytheana_assembly_iontor_iontor
+trnM trnI -trnQ nad2-0_a nad2-0_b trnW -trnC -trnY cox1 trnL2 cox2 trnK trnD atp8-0 atp6 cox3 trnG nad3 trnA trnR trnN trnS1 trnE -nad5-1 -nad5-0 -atp8-1 -trnH -nad4_b -nad4_a -nad4l-0 -nad4l-1 trnT -trnP nad6_a nad6_b cob_a cob_b trnS2 -nad1 -rrnL -trnV -rrnS 
