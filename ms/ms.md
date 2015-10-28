@@ -31,18 +31,17 @@ the indexes (barcodes) from our reads and dropping sequences shorter than 21
 base pairs.
 We used mirabait 4.0.2 (chevreux1999) to remove reads consisting of sequence
 adapters.
-  
-## Assembly using MITObim
+We use the software mitochondrial baiting and iterative mapping (MITObim v1.8,
+@han2013) to assemble the mitochondrial genome of *Libytheana motya*  using 
+the mitogenome of *Libythea celtis* (NCBI Reference Sequence: NC_016724.1)
+as reference.
 Used the IONTOR_SETTINGS in the ``manifest.conf`` file that was used by ``mira``,
 which is a sequence assembler and sequence mapping for sequencing data (including
 IonTorrent).
 The flag ``--iontor`` was used in the MITObim command line to do the mapping of the
 assembled sequence to the reference genome of a related taxon.
 
-* Used *Libythea celtis* mitochondrial genome (NCBI Reference Sequence: NC_016724.1)
-  as reference for assembly using MITObim.
-
-./MITObim_1.8.pl --iontor -start 1 -end 10 -sample testpool -ref libythea_mito_genome.fa -readpool read_without_indexes.fastq -maf libytheana_d_results/libytheana_out.maf > log
+* check n-terminus, c-terminus, align with mafft
 
 ## Annotation
 http://onlinelibrary.wiley.com/enhanced/doi/10.1111/syen.12071/
@@ -103,5 +102,10 @@ the full sequence and they appear in two pieces).
 # Analysis
 
 Partitionfinder by gene by codon. See what happens.
+
+
+# Commands
+mirabait adapter_sequences.fas CarlosJul2015/CarlosJul2015.fastq baited_seqs
+./MITObim_1.8.pl --iontor -start 1 -end 10 -sample testpool -ref libythea_mito_genome.fa -readpool read_without_indexes.fastq -maf libytheana_d_results/libytheana_out.maf > log
 
 # Bibliography
