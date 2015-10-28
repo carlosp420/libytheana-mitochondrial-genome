@@ -1,31 +1,36 @@
 # Materials and methods
+
 ## Library preparation and IonTorrent sequencing
-A MALE/FEMALE specimen of *Libytheana motya* collected in Playa Larga, Cuba by 
-COLLECTOR on April 12, 1968 was used for DNA extraction. The specimen had been
-conserved dry in a paper envelope and now is located in the Wahlberg collection
-in Lund, Sweden.
+
+A MALE/FEMALE specimen of *Libytheana motya* collected in Playa Larga, Cuba  
+on April 12, 1968 was used for DNA extraction. The specimen had been
+conserved dry in a paper envelope and is currently located in the Wahlberg
+collection at Lund University, Lund, Sweden.
 
 The whole thorax was used for DNA extraction using a modified version of the 
 Salt-extraction method from @aljanabi1997.
-Inspection on a electrophoresis gel suggested that the extracted DNA was somewhat
-degraded and it was not sheared previous to library preparation for Next Generation
-Sequencing.
+Inspection on a electrophoresis gel suggested that the extracted DNA was 
+degraded in some degree, thus it was not sheared previous to library preparation
+for Next Generation Sequencing.
 We adapted the protocol by @meyer2010 of library preparation for the 
 Ion Personal Genome Machine (PGM) sequencer (Ion Torrent, Life Technologies).
 In brief, we blunt-end repaired the extracted genomic DNA in order to ligate
 the Ion Torrent sequencing adapters A (which included a 10 base pair oligonucleotide
 as index or barcode) and P1.
-The ligated adapters were filled-in with nucleotides followed by  
-an amplification step using the forward A adaptor and the reverse P1 adaptor as
+The ligated adapters were filled-in with nucleotides followed by an
+amplification step using the forward A adaptor and the reverse P1 adaptor as
 primers.
 The resulting library was size-selected for around 400 nucleotides in length
 by cutting from an electrophoresis gel and sequenced in the Ion Torrent PGM 
-on a 318 chip.
+on a 318 chip after quality inspection using the 2100 Bioanalyzer (Agilent
+Technologies). 
 
-
-
-* Clean the IonTorrent reads by removing indexes (barcodes) from our reads and
-  dropping sequences shorter than 21 base pairs.
+## Sequence assembly
+We used a Python script to clean the sequenced Ion Torrent reads by removing
+the indexes (barcodes) from our reads and dropping sequences shorter than 21
+base pairs.
+We used mirabait 4.0.2 (chevreux1999) to remove reads consisting of sequence
+adapters.
   
 ## Assembly using MITObim
 Used the IONTOR_SETTINGS in the ``manifest.conf`` file that was used by ``mira``,
