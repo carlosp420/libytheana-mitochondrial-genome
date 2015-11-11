@@ -29,19 +29,23 @@ Technologies).
 We used a Python script to clean the sequenced Ion Torrent reads by removing
 the indexes (barcodes) from our reads and dropping sequences shorter than 21
 base pairs.
-We used mirabait 4.0.2 (chevreux1999) to remove reads consisting of sequence
+We used MIRABAIT 4.0.2 (@chevreux1999) to remove reads consisting of sequence
 adapters.
 We use the software mitochondrial baiting and iterative mapping (MITObim v1.8,
-@han2013) to assemble the mitochondrial genome of *Libytheana motya*  using 
+@hahn2013) to assemble the mitochondrial genome of *Libytheana motya*  using 
 the mitogenome of *Libythea celtis* (NCBI Reference Sequence: NC_016724.1)
 as reference.
-Used the IONTOR_SETTINGS in the ``manifest.conf`` file that was used by ``mira``,
-which is a sequence assembler and sequence mapping for sequencing data (including
-IonTorrent).
-The flag ``--iontor`` was used in the MITObim command line to do the mapping of the
-assembled sequence to the reference genome of a related taxon.
+We used the IONTOR_SETTINGS in the ``manifest.conf`` file that was employed by
+MIRA (including IonTorrent).
+The flag ``--iontor`` was used in the MITObim command line to execute the
+mapping of the assembled sequence to the reference genome of a related taxon.
 
-* check n-terminus, c-terminus, align with mafft
+We aligned the assembled genome of *Libytheana* against the reference genome of
+*Libythea celtis* using MAFFT [@katoh2013] and found a segment of 175 nucleotides
+at the start of the N-terminus that could not be aligned. We used BLASTN [@camacho2009]
+to test if this fragment actually matches the C-terminus of the reference genome.
+We found that it could not be aligned to any end so we manually removed this fragment
+from the assembled genome of *Libytheana*.
 
 ## Annotation
 http://onlinelibrary.wiley.com/enhanced/doi/10.1111/syen.12071/
