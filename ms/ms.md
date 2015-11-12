@@ -48,12 +48,13 @@ We found that it could not be aligned to any end so we manually removed this fra
 from the assembled genome of *Libytheana*.
 
 ## Annotation
-http://onlinelibrary.wiley.com/enhanced/doi/10.1111/syen.12071/
+We used the MITOS web server [@bernt2013] to annotate the assembled mitogenome 
+sequence. We used the invertebrate genetic code as parameter for MITOS.
 
-* Find identifying tRNA genes, usually via secondary structure covariation models
+## Assembly quality assessment
+./bowtie2 --local -x libytheana -U /data/projects/libytheana_mito/data/derived/reads_without_indexes.fastq -S sample3.sam
 
-Annotation using MITOS http://mitos.bioinf.uni-leipzig.de/
-
+# Results
 Annotated genes in Libytheana assembly. Spurious genes have been removed as they
 have low scores. Some duplicates are explained as split genes (we couldnt get
 the full sequence and they appear in two pieces).
