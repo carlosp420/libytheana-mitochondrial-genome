@@ -52,7 +52,18 @@ We used the MITOS web server [@bernt2013] to annotate the assembled mitogenome
 sequence. We used the invertebrate genetic code as parameter for MITOS.
 
 ## Assembly quality assessment
-./bowtie2 --local -x libytheana -U /data/projects/libytheana_mito/data/derived/reads_without_indexes.fastq -S sample3.sam
+We used bowtie 2.2.6 to align our reads to the assembled mitogenome using the
+pipeline in Supp Mat 01 (Makefile: make analysis).
+
+Average coverage was measured using samtools and the total length of our assembled
+genome:
+
+    > samtools depth cleaned_seqs_bowtie_sorted.bam | awk '{sum +=$3} END {print "Average = ", sum/15227}'
+    
+Average coverage is 10.38
+
+We used Python and the library pygal v2.0.0 to generate a histogram of the coverage at each base
+position.
 
 # Results
 Annotated genes in Libytheana assembly. Spurious genes have been removed as they
