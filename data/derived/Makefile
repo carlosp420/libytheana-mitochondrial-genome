@@ -2,7 +2,7 @@
 # Mapping reads with bwa and bowtie
 # we will use bowtie2
 
-analysis: cleaned_seqs_bwa.sam cleaned_seqs_bowtie.sam cleaned_seqs_bwa_sorted.bam cleaned_seqs_bowtie_sorted.bam
+analysis: cleaned_seqs_bwa_sorted.bam.bai cleaned_seqs_bowtie_sorted.bam.bai
 
 # copy ref genome to current folder
 libytheana_clipped.fasta: /data/projects/libytheana_mito/data/derived/libytheana_clipped.fasta
@@ -49,7 +49,11 @@ cleaned_seqs_bwa.bam: libytheana_clipped.fasta.fai cleaned_seqs_bwa.sam
 # sort the bwa BAM file
 cleaned_seqs_bwa_sorted.bam: cleaned_seqs_bwa.bam
 	@echo "### sort the BAM file ###"
-	samtools sort $<  $@
+	samtools sort $<  cleaned_seqs_bwa_sorted
+
+# index the bwa BAM file
+cleaned_seqs_bwa_sorted.bam.bai: cleaned_seqs_bwa_sorted.bam
+	samtools index $<
 
 # convert bowtie SAM to BAM file
 cleaned_seqs_bowtie.bam: libytheana_clipped.fasta.fai cleaned_seqs_bowtie.sam
@@ -62,4 +66,6 @@ cleaned_seqs_bowtie_sorted.bam: cleaned_seqs_bowtie.bam
 	samtools sort $<  cleaned_seqs_bowtie_sorted
 
 # index the BAM file
+cleaned_seqs_bowtie_sorted.bam.bai: cleaned_seqs_bowtie_sorted.bam
+	samtools index $<
 
