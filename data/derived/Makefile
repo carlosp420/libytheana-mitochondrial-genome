@@ -2,7 +2,8 @@
 # Mapping reads with bwa and bowtie
 # we will use bowtie2
 
-analysis: cleaned_seqs_bwa_sorted.bam.bai cleaned_seqs_bowtie_sorted.bam.bai
+analysis: cleaned_seqs_bwa_sorted.bam.bai cleaned_seqs_bowtie_sorted.bam.bai \
+        coverage.svg
 
 # copy ref genome to current folder
 libytheana_clipped.fasta: /data/projects/libytheana_mito/data/derived/libytheana_clipped.fasta
@@ -69,3 +70,12 @@ cleaned_seqs_bowtie_sorted.bam: cleaned_seqs_bowtie.bam
 cleaned_seqs_bowtie_sorted.bam.bai: cleaned_seqs_bowtie_sorted.bam
 	samtools index $<
 
+####
+# Measure coverage by base pair
+####
+coverage.txt: cleaned_seqs_bowtie_sorted.bam
+	samtools depth $<  > $@
+	samtools depth $< | awk '{sum +=$$3} END {print "Average = ", sum/15227}'
+
+coverage.svg: coverage.txt plot_coverage.py
+	python plot_coverage.py
