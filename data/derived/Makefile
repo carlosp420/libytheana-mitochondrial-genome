@@ -32,7 +32,7 @@ libytheana_bowtie.4.bt2: libytheana_clipped.fasta
 
 # do alignment: bowtie <indexFile> <fastqfile> <outputFile>
 cleaned_seqs_bowtie.sam: libytheana_bowtie.4.bt2 cleaned_seqs.fastq
-	./bowtie2 -N 1 --mp 2 --local -x libytheana_bowtie -U cleaned_seqs.fastq -S cleaned_seqs_bowtie.sam
+	./bowtie2  --local -x libytheana_bowtie -U cleaned_seqs.fastq -S cleaned_seqs_bowtie.sam
 
 
 ## samtools
