@@ -1,40 +1,37 @@
 import pygal
 
+GENOME_LENGTH = 15227
 
-hist = pygal.Histogram(y_title="Coverage",
+line_chart = pygal.Bar(y_title="Coverage",
                        title="Coverage at each base position",
                        height=300, width=1500,
+                       truncate_label=-1,
+                       show_minor_x_labels=False,
                        show_legend=False)
 
 with open("coverage.txt", "r") as handle:
     raw_data = handle.readlines()
 
-data = []
-past_position = None
+raw_coverage = {}
 for raw_line in raw_data:
     line = raw_line.strip()
     line = line.split("\t")
-
-    this_position = int(line[1])
-    if not past_position:
-        past_position = this_position - 1
+    this_base_position = line[1]
     this_coverage = int(line[2])
 
-    data.append((this_coverage, past_position, this_position))
+    raw_coverage[this_base_position] = this_coverage
 
-    past_position = this_position
 
-hist.add("Coverage", data)
-hist.x_labels = (
-    {'label': '0', 'value': 0},
-    {'label': '2000', 'value': 2000},
-    {'label': '4000', 'value': 4000},
-    {'label': '6000', 'value': 6000},
-    {'label': '8000', 'value': 8000},
-    {'label': '10000', 'value': 10000},
-    {'label': '120000', 'value': 12000},
-    {'label': '140000', 'value': 14000},
-    {'label': '160000', 'value': 16000},
-)
-hist.render_to_png("coverage.png")
-hist.render_to_file("coverage.svg")
+data = []
+for i in range(0, GENOME_LENGTH):
+    try:
+        this_coverage = raw_coverage[str(i)]
+    except KeyError:
+        this_coverage = 0
+    data.append(this_coverage)
+
+line_chart.x_labels = map(str, range(0, 16500))
+line_chart.x_labels_major = ['0', '2000', '4000', '6000', '8000', '10000', '12000', '14000', '16000']
+line_chart.add("Coverage", data)
+line_chart.render_to_png("coverage.png")
+line_chart.render_to_file("coverage.svg")
