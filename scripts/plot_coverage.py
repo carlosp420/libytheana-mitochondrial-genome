@@ -1,3 +1,7 @@
+"""
+Plots coverage of sequenced reads onto the assembled mito genome of Libytheana.
+The coverage has been measured using samtools and it is per base position.
+"""
 import pygal
 
 GENOME_LENGTH = 15227
