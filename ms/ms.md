@@ -52,18 +52,68 @@ We used the MITOS web server [@bernt2013] to annotate the assembled mitogenome
 sequence. We used the invertebrate genetic code as parameter for MITOS.
 
 ## Assembly quality assessment
-We used bowtie 2.2.6 to align our reads to the assembled mitogenome using the
-pipeline in Supp Mat 01 (Makefile: make analysis).
+We used bowtie2 (version 2.2.6) to map our reads to the assembled mitogenome using the
+pipeline in Supp Mat 01 (Makefile: make analysis). The resulting BAM file was
+sorted and indexed with SAMtools [@li2009]. We measured average coverage and 
+coverage at base position using SAMtools (command ``samtools depth``).
 
-Average coverage was measured using samtools and the total length of our assembled
-genome:
+We used the Python libraries pygal v2.0.11 and pandas v0.17.0 to generate plots
+for coverage at base position and histogram (Figs. XY).
 
-    > samtools depth cleaned_seqs_bowtie_sorted.bam | awk '{sum +=$3} END {print "Average = ", sum/15227}'
-    
+We also assessed the quality of our assembly by aligning and comparing our
+DNA sequence (and translated into aminoacids) with the published mitogenome of
+*Libythea celtis* (GenBank accession number NC_016724.1).
+The alignments show that we were able to recover most of the mitochondrial genes
+of *Libytheana celtis*, however there were some gaps, especially for the gene
+ATP8, ND2, ND5, ND4L and rrnS.
+
 Average coverage is 10.38
 
-We used Python and the library pygal v2.0.0 to generate a histogram of the coverage at each base
-position.
+# Comparison with other Libythea mitogenomes
+* gene _trnM had 3 insertions
+* gene _trnI had 1 insertion
+* gene _trnQ matches the other mitogenome seqs.
+* gene nad2_a alignes with ref genomes but length is short (200bp only).
+* gene nad2_b alignes with ref genomes but length is short (117bp only).
+* gene _trnW alignes with ref genomes.
+* gene _trnC alignes but few mismatches.
+* gene _trnY alignes. 
+* gene cox1 alignes and matches with ref genomes (1509bp in length).
+* gene _trnL2 alignes and matches with ref genomes.
+* gene co2-1 alignes and matches with ref genomes (108 bp in length).
+* gene co2-0 alignes and matches with ref genomes (558 bp in length) but middle
+  was not recovered with good quality (ambiguous nucleotides).
+* gene trnK alignes and matches with ref genomes.
+* gene trnD alignes and matches with ref genomes.
+* gene atp6 alignes and matches with ref genomes (750 bp in length)
+* gene cox3 alignes and matches with ref genomes.
+* gene trnG alignes and matches with ref genomes.
+* gene nad3 alignes and matches with ref genomes.
+* gene trnA alignes but some missing and ambiguous nucleotides.
+* gene trnN alignes but some missing and ambiguous nucleotides.
+* gene trnS1 alignes but some missing and ambiguous nucleotides.
+* gene trnE alignes but some missing and ambiguous nucleotides.
+* gene nad5-1 alignes
+* gene nad5-0 alignes but some missing and ambiguous nucleotides.
+* gene trnH lignes but some missing and ambiguous nucleotides.
+* gene nad4 alignes
+* gene nad4-l alignes
+* gene nad6_a alignes but some missing and ambiguous nucleotides.
+* gene nad6_b alignes
+* gene cob_a alignes
+* gene cob_b alignes
+* gene nad1-1 alignes but some missing and ambiguous nucleotides.
+* gene nad1-0 alignes.
+* gene atp8 alignes but missing many base pairs.
+* gene trnR alignes but missing many base pairs.
+* gene trnT alignes but missing many base pairs.
+* gene trnP alignes
+* gene trnS2 alignes
+* gene rrnL alignes but missing many base pairs.
+* gene trnV alignes
+* gene rrnS alignes
+
+
 
 # Results
 Annotated genes in Libytheana assembly. Spurious genes have been removed as they
